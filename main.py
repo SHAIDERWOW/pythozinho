@@ -12,7 +12,7 @@ if is_prod:
 else:
     import secreto
     token = secreto.token
-token = secreto.token
+
 user = discord.Member
 ''' EVENTOS DO BOT'''
 #MOSTRA NO TERMINAL ONDE TA LOGADO E MUDA STATUS DO BOT
