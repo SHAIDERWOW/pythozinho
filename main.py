@@ -65,6 +65,8 @@ async def myinfo(ctx):
     await bot.say(embed=embedusu)
 
 
+    
+    
 #COMANDO PING PONG *SEM MOSTRAR MS
 @bot.command(pass_context=True)
 async def ping(ctx):
@@ -75,6 +77,11 @@ async def ping(ctx):
 @bot.command()
 async def python():
      await bot.say("Python é uma linguagem de programação criada por Guido van Rossum em 1991.\n Os objetivos do projeto da linguagem eram: produtividade e legibilidade.\n Em outras palavras, Python é uma linguagem que foi criada para produzir código bom e fácil de manter de maneira rápida.")
+
+#MOSTRA MENSAGEM DE BOAS VINDAS
+@bot.command()
+async def java():
+     await bot.say("é uma linguagem de programação e plataforma computacional lançada pela primeira vez pela Sun Microsystems em 1995.\n Existem muitas aplicações e sites que não funcionarão, a menos que você tenha o Java instalado, e mais desses são criados todos os dias..")
 
 
 #MOSTRA INFORMAÇÕES DO SERVIDOR
@@ -101,6 +108,7 @@ bot.remove_command('help')
 async def help():
     embedhelp = discord.Embed(title="Pythozinho", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
     embedhelp.add_field(name="?python", value="Sobre o python", inline=False)
+    embedhelp.add_field(name="?java", value="Sobre o java", inline=False)
     embedhelp.add_field(name="?cat", value="Gatinho gif :3", inline=False)
     embedhelp.add_field(name="?info", value="Informaçoes", inline=False)
     embedhelp.add_field(name="?help", value="Ajuda", inline=False)
