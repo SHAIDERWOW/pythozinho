@@ -50,6 +50,12 @@ async def on_member_ban(user):
 
 
 ''' COMANDOS DO BOT'''
+#REPETE ALGO
+@bot.command(pass_context=True)
+async def diz(self, *, msg: str):
+        msg = re.sub('´', '`', msg)
+        await self.bot.say(msg)
+
 #GERA CONVITE
 @bot.command(pass_context=True)
 async def convite(context):
