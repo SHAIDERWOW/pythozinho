@@ -50,6 +50,12 @@ async def on_member_ban(user):
 
 
 ''' COMANDOS DO BOT'''
+#GERA CONVITE
+@bot.command(pass_context=True)
+async def convite(context):
+	invite = await bot.create_invite(context.message.server,max_uses=1,xkcd=True)
+	await bot.send_message(context.message.author,"Seu convite é {}".format(invite.url))
+
 #DELETA MENSAGENS
 @bot.command(pass_context=True)
 async def delete(context, number : int):
