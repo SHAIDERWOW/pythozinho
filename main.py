@@ -60,7 +60,7 @@ async def convite(context):
 @bot.command(pass_context=True)
 async def delete(context, number : int):
 	deleted = await bot.purge_from(context.message.channel, limit=number)
-	await bot.send_message(context.message.channel, 'Deleted {} message(s)'.format(len(deleted)))
+	await bot.send_message(context.message.channel, 'Deletado {} message(s)'.format(len(deleted)))
 
 #MOSTRA INFORMAÇOES DO USUARIO
 @bot.command(pass_context=True)
@@ -123,6 +123,8 @@ async def help():
     embedhelp.add_field(name="?cat", value="Gatinho gif :3", inline=False)
     embedhelp.add_field(name="?info", value="Informaçoes", inline=False)
     embedhelp.add_field(name="?help", value="Ajuda", inline=False)
+    embedhelp.add_field(name="?convite", value="Envia o convite do serve no seu privado", inline=False)
+    embedhelp.add_field(name="?delete", value="Deleta mensagem passando a quantidade", inline=False)
     embedhelp.add_field(name="?myinfo", value="Mostra suas informações", inline=False)
 
     await bot.say(embed=embedhelp)
