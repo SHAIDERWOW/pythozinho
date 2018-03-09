@@ -111,8 +111,6 @@ async def info():
 
     await bot.say(embed=embedin)
 
-
-
 #ENVIA UM GATINHO EM GIF
 @bot.command()
 async def cat():
@@ -129,6 +127,7 @@ async def help():
     embedhelp.add_field(name="?cat", value="Gatinho gif :3", inline=False)
     embedhelp.add_field(name="?info", value="Informaçoes", inline=False)
     embedhelp.add_field(name="?help", value="Ajuda", inline=False)
+    embedhelp.add_field(name="?diz", value="Escreve a messagem digitida", inline=False)
     embedhelp.add_field(name="?convite", value="Envia o convite do serve no seu privado", inline=False)
     embedhelp.add_field(name="?delete", value="Deleta mensagem passando a quantidade", inline=False)
     embedhelp.add_field(name="?myinfo", value="Mostra suas informações", inline=False)
