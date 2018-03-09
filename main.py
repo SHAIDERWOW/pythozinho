@@ -35,26 +35,8 @@ async def on_member_join(member):
 
     await bot.add_roles(member)
 
-#MOSTRA UM GIF AO BANIR USUSARIO
-@client.event
-async def on_member_ban(user):
-    channel = discord.utils.find(lambda c: c.name == 'banimentos', user.server.channels)
-    embed = discord.Embed(title='Sinta o martelo!', description='Algum staff baniu o membro **@{0.name}** do servidor!\n\nO martelo deve ter doído :0'.format(user), color=0xff9d00)
-    embed.set_image(url='https://i.imgur.com/O3DHIA5.gif')
-    embed.set_thumbnail(url=user.avatar_url)
-    await client.send_message(channel, embed=embed)
-
-
-
-
-
 
 ''' COMANDOS DO BOT'''
-
-@bot.command(pass_context=True)
-async def kick(ctx, user: discord.Member):
-    await bot.say("{}foi banido do server!!".format(user.name))
-    await bot.kick(user)
 
 #GERA CONVITE
 @bot.command(pass_context=True)
@@ -82,8 +64,6 @@ async def myinfo(ctx):
     await bot.say(embed=embedusu)
 
 
-    
-    
 #COMANDO PING PONG *SEM MOSTRAR MS
 @bot.command(pass_context=True)
 async def ping(ctx):
