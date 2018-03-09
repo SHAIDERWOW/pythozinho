@@ -50,11 +50,6 @@ async def on_member_ban(user):
 
 
 ''' COMANDOS DO BOT'''
-#REPETE ALGO
-@bot.command(pass_context=True)
-async def diz(self, *, msg: str):
-        msg = re.sub('´', '`', msg)
-        await self.bot.say(msg)
 
 #GERA CONVITE
 @bot.command(pass_context=True)
@@ -127,7 +122,6 @@ async def help():
     embedhelp.add_field(name="?cat", value="Gatinho gif :3", inline=False)
     embedhelp.add_field(name="?info", value="Informaçoes", inline=False)
     embedhelp.add_field(name="?help", value="Ajuda", inline=False)
-    embedhelp.add_field(name="?diz", value="Escreve a messagem digitida", inline=False)
     embedhelp.add_field(name="?convite", value="Envia o convite do serve no seu privado", inline=False)
     embedhelp.add_field(name="?delete", value="Deleta mensagem passando a quantidade", inline=False)
     embedhelp.add_field(name="?myinfo", value="Mostra suas informações", inline=False)
