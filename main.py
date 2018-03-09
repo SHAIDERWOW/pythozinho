@@ -51,6 +51,11 @@ async def on_member_ban(user):
 
 ''' COMANDOS DO BOT'''
 
+@bot.command(pass_context=True)
+async def kick(ctx, user: discord.Member):
+    await bot.say("{}foi banido do server!!".format(user.name))
+    await bot.kick(user)
+
 #GERA CONVITE
 @bot.command(pass_context=True)
 async def convite(context):
