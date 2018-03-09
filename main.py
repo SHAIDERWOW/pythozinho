@@ -50,6 +50,11 @@ async def on_member_ban(user):
 
 
 ''' COMANDOS DO BOT'''
+#DELETA MENSAGENS
+@bot.command(pass_context=True)
+async def delete(context, number : int):
+	deleted = await bot.purge_from(context.message.channel, limit=number)
+	await bot.send_message(context.message.channel, 'Deleted {} message(s)'.format(len(deleted)))
 
 #MOSTRA INFORMAÇOES DO USUARIO
 @bot.command(pass_context=True)
