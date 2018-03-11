@@ -9,5 +9,5 @@
 
 
 # Versao 1.0  #
-##basic moderation##
-###in development###
+basic moderation
+in development
