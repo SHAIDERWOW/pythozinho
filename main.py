@@ -57,7 +57,7 @@ async def moeda(ctx):
 #ENVIA UM VIDEO ALEATORIO DO MEU CANAL
 @bot.command(pass_context=True)
 async def music(ctx):
-    song = ['https://www.youtube.com/watch?v=XzK7nCUCHEA', 'https://www.youtube.com/watch?v=G684IQwqodM', 'https://www.youtube.com/watch?v=uukforYWCkk', 'https://www.youtube.com/watch?v=3_29xfehVgY']
+    song = ['https://www.youtube.com/watch?v=uukforYWCkk', 'https://www.youtube.com/watch?v=3_29xfehVgY','https://www.youtube.com/watch?v=RH_vE8eWWEs']
     choice  = random.choice(song)
     await bot.say('{}, Aqui está sua musica aleátoria.\n'.format(ctx.message.author.name) + choice)
 
@@ -99,24 +99,14 @@ async def ping():
     await bot.edit_message(pingus, embed=ping1)
 
 
-#FALA SOBRE O PYTHON
-@bot.command()
-async def python():
-     await bot.say("Python é uma linguagem de programação criada por Guido van Rossum em 1991.\n Os objetivos do projeto da linguagem eram: produtividade e legibilidade.\n Em outras palavras, Python é uma linguagem que foi criada para produzir código bom e fácil de manter de maneira rápida.")
-
-#FALA SOBRE O JAVA
-@bot.command()
-async def java():
-     await bot.say("é uma linguagem de programação e plataforma computacional lançada pela primeira vez pela Sun Microsystems em 1995.\n Existem muitas aplicações e sites que não funcionarão, a menos que você tenha o Java instalado, e mais desses são criados todos os dias..")
-
 
 #MOSTRA INFORMAÇÕES DO SERVIDOR
 @bot.command()
 async def info():
-    embedin = discord.Embed(title="Olá sou pythozinho", description="convite e membros online.", color=0xeee657)
+    embedin = discord.Embed(title="Olá sou pythozinho", description="convite do server e membros online.", color=0xeee657)
     embedin.add_field(name="Author", value="Vagner")
     embedin.add_field(name="Server count", value=f"{(len(bot.servers))}")
-    embedin.add_field(name="Invite", value="https://discord.gg/vSFN3Zx")
+    embedin.add_field(name="Convite", value="https://discord.gg/8jD48HB")
 
     await bot.say(embed=embedin)
 
@@ -125,14 +115,18 @@ async def info():
 async def cat():
     await bot.say("https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif")
 
+#ENVI O GITHUB 
+@bot.command
+async def github():
+	await bot.say('https://github.com/vagner2k18/pythozinho')
+
 
 #EXIBE OS COMANDOS DO BOT
 bot.remove_command('help')
 @bot.command()
 async def help():
-    embedhelp = discord.Embed(title="Pythozinho", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
-    embedhelp.add_field(name="?python", value="Sobre o python", inline=False)
-    embedhelp.add_field(name="?java", value="Sobre o java", inline=False)
+    embedhelp = discord.Embed(title="Pythozinho   Prefixo = ? ", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
+    embedhelp.add_field(name="?github", value="mostra meu github,caso queira me adcionar au seu servidor", inline=False)
     embedhelp.add_field(name="?cat", value="Gatinho gif :3", inline=False)
     embedhelp.add_field(name="?info", value="Informaçoes", inline=False)
     embedhelp.add_field(name="?help", value="Ajuda", inline=False)
