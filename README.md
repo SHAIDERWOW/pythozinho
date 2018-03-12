@@ -8,7 +8,7 @@
 
 
 
-# Versao 1.0  #
+# Versao 1.0 - in developer #
 
-##in development##
+
 [![PyPI - Status](https://img.shields.io/badge/Adicionar-No%20seu%20server-blue.svg)](https://discordapp.com/oauth2/authorize?&client_id=420703371918442499&scope=bot&permissions=12659727)
