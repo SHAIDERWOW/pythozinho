@@ -116,7 +116,7 @@ async def cat():
     await bot.say("https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif")
 
 #ENVI O GITHUB 
-@bot.command
+@bot.command()
 async def github():
 	await bot.say('https://github.com/vagner2k18/pythozinho')
 
@@ -125,7 +125,7 @@ async def github():
 bot.remove_command('help')
 @bot.command()
 async def help():
-    embedhelp = discord.Embed(title="Pythozinho   Prefixo = ? ", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
+    embedhelp = discord.Embed(title="Pythozinho---Prefixo = ? ", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
     embedhelp.add_field(name="?github", value="mostra meu github,caso queira me adcionar au seu servidor", inline=False)
     embedhelp.add_field(name="?cat", value="Gatinho gif :3", inline=False)
     embedhelp.add_field(name="?info", value="Informaçoes", inline=False)
