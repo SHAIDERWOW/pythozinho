@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import time
 import random
-
+import re
 ''' VARIAVEIS'''
 
 bot = commands.Bot(command_prefix='?', description='Bem vindos Ao discord.')
@@ -24,7 +24,7 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    return await bot.change_presence(game=discord.Game(name='Programando'))
+    return await bot.change_presence(game=discord.Game(name='Pedra na lua'))
 
 
 
@@ -39,6 +39,48 @@ async def on_member_join(member):
 
 
 ''' COMANDOS DO BOT'''
+#KIKA UM MEMBRO DO SERVE
+@bot.command(pass_context=True)
+async def kick(ctx, member: discord.Member):
+    if ctx.message.author.server_permissions.kick_members :
+        await bot.say("Kikado!")
+        await bot.kick(member)
+    else:
+        embed = discord.Embed(title=":x: Erro na permissão!", description=" \n ", color=0xff0000)
+        embed.add_field(name="Voce nao possui perrmissão para esse comando procure um administrador.".format(
+            ctx.message.author.name), value='_Membro kikado_', inline=False)
+        embed.set_thumbnail(url=member.avatar_url)
+
+        await bot.say(embed=embed)
+
+#REPETE O FOI DITO
+@bot.command(pass_context=True)
+async def diz(self, *, msg: str):
+        msg = re.sub('´', '`', msg)
+        await self.bot.say(msg)
+
+#GERA EMBED COM PARAMTRO TEXTO E SUA FOTO
+@bot.command(pass_context=True)
+async def eco(ctx, *, phrase):
+    try:
+        embed3 = discord.Embed(title="Eco", description=" \n ", color=0x0000ff)
+        embed3.add_field(name="{} Falou...".format(ctx.message.author.name), value="**{}**".format(phrase), inline=False)
+        embed3.set_thumbnail(url=ctx.message.author.avatar_url)
+        await bot.say(embed=embed3)
+
+    except Exception as e:
+
+        embed3 = discord.Embed(title="ERROR", description=" \n ", color=0xff0000)
+        embed3.add_field(name="Falha ao executar.".format(ctx.message.author.name),
+                        value="Se acontecer esse erro 3#0001\nA frase causadora do foi  `\"{}\"`".format(
+                            phrase), inline=False)
+        await bot.say(embed=embed3)
+
+#GERA CONVITE
+@bot.command(pass_context=True)
+async def convite(ctx):
+	invite = await bot.create_invite(ctx.message.channel,max_uses=1,xkcd=True)
+	await bot.send_message(ctx.message.author,"Seu convite é {}".format(invite.url))
 #ROLA O DADO
 @bot.command(pass_context=True, aliases=['dice'])
 async def dado(ctx):
@@ -62,11 +104,6 @@ async def music(ctx):
     await bot.say('{}, Aqui está sua musica aleátoria.\n'.format(ctx.message.author.name) + choice)
 
 
-#GERA CONVITE
-@bot.command(pass_context=True)
-async def convite(context):
-	invite = await bot.create_invite(context.message.server,max_uses=1,xkcd=True)
-	await bot.send_message(context.message.author,"Seu convite é {}".format(invite.url))
 
 #DELETA MENSAGENS
 @bot.command(pass_context=True)
@@ -99,17 +136,6 @@ async def ping():
     await bot.edit_message(pingus, embed=ping1)
 
 
-
-#MOSTRA INFORMAÇÕES DO SERVIDOR
-@bot.command()
-async def info():
-    embedin = discord.Embed(title="Olá sou pythozinho", description="convite do server e membros online.", color=0xeee657)
-    embedin.add_field(name="Author", value="Vagner")
-    embedin.add_field(name="Server count", value=f"{(len(bot.servers))}")
-    embedin.add_field(name="Convite", value="https://discord.gg/8jD48HB")
-
-    await bot.say(embed=embedin)
-
 #ENVIA UM GATINHO EM GIF
 @bot.command()
 async def cat():
@@ -125,19 +151,12 @@ async def github():
 bot.remove_command('help')
 @bot.command()
 async def help():
-    embedhelp = discord.Embed(title="Pythozinho---Prefixo = ? ", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
-    embedhelp.add_field(name="?github", value="mostra meu github,caso queira me adcionar au seu servidor", inline=False)
-    embedhelp.add_field(name="?cat", value="Gatinho gif :3", inline=False)
-    embedhelp.add_field(name="?info", value="Informaçoes", inline=False)
-    embedhelp.add_field(name="?help", value="Ajuda", inline=False)
-    embedhelp.add_field(name="?music", value="Mostra um video aleátorio do meu canal/ obs: da like", inline=False)
-    embedhelp.add_field(name="?moeda", value="Joga uma moeda", inline=False)
-    embedhelp.add_field(name="?ping", value="Mostra o tempo de resposta entre o bot e o servirdor", inline=False)
-    embedhelp.add_field(name="?dado", value="Rola um dado de 6 lados", inline=False)
-    embedhelp.add_field(name="?convite", value="Envia o convite do serve no seu privado", inline=False)
-    embedhelp.add_field(name="?delete", value="Deleta mensagem passando a quantidade", inline=False)
-    embedhelp.add_field(name="?myinfo", value="Mostra suas informações", inline=False)
-
+    embedhelp = discord.Embed(title="Pythozinho --Prefixo = ? ", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
+    embedhelp.add_field(name="Sobre o bot ", value="?github,?botinfo", inline=False)
+    embedhelp.add_field(name="Moderação", value="?kick", inline=False)
+    embedhelp.add_field(name="Diversao", value="?cat,?ping,?music,?dado,?moeda,?eco", inline=False)
+    embedhelp.add_field(name="Gerar convite do serve", value="?convite", inline=False)
+    embedhelp.add_field(name="Ultilidades", value="?myinfo,?delete", inline=False)
     await bot.say(embed=embedhelp)
 
 
