@@ -165,7 +165,7 @@ async def help():
     embedhelp = discord.Embed(title="Pythozinho --Prefixo = ? ", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
     embedhelp.add_field(name="Sobre o bot ", value="?github,?botinfo", inline=False)
     embedhelp.add_field(name="Moderação", value="?kick", inline=False)
-    embedhelp.add_field(name="Diversao", value="?cat,?ping,?music,?dado,?moeda,?eco", inline=False)
+    embedhelp.add_field(name="Diversao", value="?cat,?ping,?music,?dado,?moeda,?eco,?diz", inline=False)
     embedhelp.add_field(name="Gerar convite do serve", value="?convite", inline=False)
     embedhelp.add_field(name="Ultilidades", value="?myinfo,?delete", inline=False)
     await bot.say(embed=embedhelp)
