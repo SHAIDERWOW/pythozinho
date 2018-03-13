@@ -39,6 +39,16 @@ async def on_member_join(member):
 
 
 ''' COMANDOS DO BOT'''
+#INFO DO BOT
+@bot.command(pass_context=True)
+async def botinfo():
+  embedbotin = discord.Embed(title="Olá sou pythozinho", description="Basic bot discord.", color=0xeee657)
+  embedbotin.set_thumbnail(url=bot.user.default_avatar_url)
+  embedbotin.add_field(name='GitHub',value='https://github.com/vagner2k18/pythozinho')
+  embedbotin.add_field(name='Me adcione no seu server',value='goo.gl/q9hKzS')
+  embedbotin.add_field(name='estou online em',value='--> '+(str(len(bot.servers)))+ ' <--Serve(s)')
+  await bot.say(embed=embedbotin)
+
 #KIKA UM MEMBRO DO SERVE
 @bot.command(pass_context=True)
 async def kick(ctx, member: discord.Member):
@@ -76,6 +86,7 @@ async def eco(ctx, *, phrase):
                             phrase), inline=False)
         await bot.say(embed=embed3)
 
+	
 #GERA CONVITE
 @bot.command(pass_context=True)
 async def convite(ctx):
