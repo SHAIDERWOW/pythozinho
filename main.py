@@ -24,7 +24,7 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    return await bot.change_presence(game=discord.Game(name='Pedra na lua'))
+    return await bot.change_presence(game=discord.Game(name='?help'))
 
 
 
@@ -157,18 +157,72 @@ async def cat():
 async def github():
 	await bot.say('https://github.com/vagner2k18/pythozinho')
 
+	
+# Server Info
+@bot.command(pass_context=True)
+async def serverinfo(ctx):
+    server = ctx.message.server
+    online = len([m.status for m in ctx.message.server.members
+                    if m.status == discord.Status.online or
+                    m.status == discord.Status.idle])
+
+    embed = discord.Embed(name="{} Server ".format(ctx.message.server.name), color=0x551A8B)
+    embed.add_field(name="Server name", value=ctx.message.server.name, inline=True)
+    embed.add_field(name="Dono", value=ctx.message.server.owner.mention)
+    embed.add_field(name="Server ID", value=ctx.message.server.id, inline=True)
+    embed.add_field(name="Cargos", value=len(ctx.message.server.roles), inline=True)
+    embed.add_field(name="Membros", value=len(ctx.message.server.members), inline=True)
+    embed.add_field(name="Online", value=f"**{online}/{len(ctx.message.server.members)}**")
+    embed.add_field(name="Criado em", value=ctx.message.server.created_at.strftime("%d %b %Y %H:%M"))
+    embed.add_field(name="Emojis", value=f"{len(ctx.message.server.emojis)}/100")
+    embed.add_field(name="Server Região", value=str(ctx.message.server.region).title())
+    embed.set_thumbnail(url=ctx.message.server.icon_url)
+    embed.set_footer(text="Copyright © 2018 vagner")
+    await bot.say(embed=embed)
+
+# Ban
+@bot.command(pass_context=True)
+async def ban(ctx, member: discord.Member):
+ if ctx.message.author.server_permissions.kick_members:
+    await bot.ban(member)
+    await bot.say("{} Banido".format(member.mention))
+ else:
+     embed = discord.Embed(title=":x: Erro na permissão!", description=" \n ", color=0xff0000)
+     embed.add_field(name="Voce nao possui perrmissão para esse comando procure um administrador.".format(
+         ctx.message.author.name), value='_Ban Ban_', inline=False)
+     embed.set_thumbnail(url=member.avatar_url)
+
+     await bot.say(embed=embed)
+
 
 #EXIBE OS COMANDOS DO BOT
 bot.remove_command('help')
-@bot.command()
-async def help():
-    embedhelp = discord.Embed(title="Pythozinho --Prefixo = ? ", description="Olá eu fui criado em python, abaixo segue minha lista de comandos:", color=0xeee657)
-    embedhelp.add_field(name="Sobre o bot ", value="?github,?botinfo", inline=False)
-    embedhelp.add_field(name="Moderação", value="?kick", inline=False)
-    embedhelp.add_field(name="Diversao", value="?cat,?ping,?music,?dado,?moeda,?eco,?diz", inline=False)
-    embedhelp.add_field(name="Gerar convite do serve", value="?convite", inline=False)
-    embedhelp.add_field(name="Ultilidades", value="?myinfo,?delete", inline=False)
-    await bot.say(embed=embedhelp)
+@bot.command(pass_context=True)
+async def helptest(ctx):
+    embed = discord.Embed(title="Lista de comandos do pythozinho",
+                          description="Dentro de <>são os parâmetros para rodar o comando",
+                          color=0x30abc0)
+
+    embed.add_field(name='I-MODERAÇÃO', value='----------------------------', inline=False)
+    embed.add_field(name='?kick', value='<Marque o membro para kika-lo>tira o membro do servidor', inline=False)
+    embed.add_field(name='?ban', value='<Marque o membro para Bani-lo>Bane o membro do servidor', inline=False)
+    embed.add_field(name='II-DIVERSÃO', value='----------------------------', inline=False)
+    embed.add_field(name='?moeda', value='joga a moeda', inline=False)
+    embed.add_field(name='?dado', value='joga um dado de 6 lados', inline=False)
+    embed.add_field(name='?diz', value='<Texto>pega o texto digitado e manda no canal', inline=False)
+    embed.add_field(name='?eco', value='<Texto> pega o texto digitado e sua foto e envia no canal', inline=False)
+    embed.add_field(name='?cat', value='envia um gif de um gato', inline=False)
+    embed.add_field(name='?music', value='envia um video aleatorio do meu canal', inline=False)
+    embed.add_field(name='?ping', value='mostra o tempo de reposta com server', inline=False)
+    embed.add_field(name='III-SOBRE O BOT', value='----------------------------', inline=False)
+    embed.add_field(name='?github', value='mostra meu repositorio no github', inline=False)
+    embed.add_field(name='?botinfo', value='mostra meu status no servidor', inline=False)
+    embed.add_field(name='IV-ULTILIDADES', value='----------------------------', inline=False)
+    embed.add_field(name='?myinfo', value='mostrar suas informações no server', inline=False)
+    embed.add_field(name='?serverinfo', value='mostras as informações do servidor', inline=False)
+    embed.add_field(name='?delete', value='<Quantidade Inteiro>deleta messagens igual a quantidade passada', inline=False)
+    embed.set_footer(text="created by vagner")
+    await bot.send_message(ctx.message.author, embed=embed)
 
 
 
