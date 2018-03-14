@@ -198,7 +198,7 @@ async def ban(ctx, member: discord.Member):
 #EXIBE OS COMANDOS DO BOT
 bot.remove_command('help')
 @bot.command(pass_context=True)
-async def helptest(ctx):
+async def help(ctx):
     embed = discord.Embed(title="Lista de comandos do pythozinho",
                           description="Dentro de <>são os parâmetros para rodar o comando",
                           color=0x30abc0)
