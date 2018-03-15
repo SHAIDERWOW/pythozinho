@@ -171,7 +171,7 @@ async def myinfo(ctx):
     embedusu.add_field(name="Seu Nome", value=user.name)
     embedusu.add_field(name="Seu Id", value=user.id)
     embedusu.add_field(name="Status", value=user.status)
-    embedusu.add_field(name="Entrou no serve em", value=user.joined_at("%d %b %Y %H:%M"))
+    embedusu.add_field(name="Entrou no serve em", value=user.joined_at)
 
     await bot.say(embed=embedusu)
 
