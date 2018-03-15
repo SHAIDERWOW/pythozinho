@@ -33,12 +33,52 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     await bot.send_message(member,
-                           'Bem Vindo ao ' + member.server.name + ' ' + member.mention + '\n Estou aqui para ajudar ,digite ?help para ver so comandos .')
+                           'Bem Vindo ao ' + member.server.name + ' ' + member.mention + '\n Estou aqui para ajudar || Digite ?help para ver meus comandos .')
 
     await bot.add_roles(member)
 
 
 ''' COMANDOS DO BOT'''
+#DESMULTAR O USUARIO
+@bot.command(pass_context = True)
+async def desmultar(ctx, member : discord.Member):
+    if not ctx.message.author.server_permissions.administrator:
+        return await bot.say("Somente adm podem mutar........")
+    overwrite = discord.PermissionOverwrite()
+    overwrite.send_messages = True
+    await bot.edit_channel_permissions(ctx.message.channel, member, overwrite)
+    await bot.say("" + member.mention + " foi desmultado ")
+    overwrite.send_messages = True
+    await bot.edit_channel_permissions(ctx.message.channel, member, overwrite)
+
+#iMPEDIR DO USUÁRIO DIGITAR POR UM PERIODO DE TEMPO
+@bot.command(pass_context = True)
+async def mutar(ctx, member : discord.Member, mutetime):
+    if not ctx.message.author.server_permissions.administrator:
+        return await bot.say("Somente adm podem mutar........")
+    overwrite = discord.PermissionOverwrite()
+    overwrite.send_messages = False
+    await bot.edit_channel_permissions(ctx.message.channel, member, overwrite)
+    await bot.say("" + member.mention + " foi mutado por " + mutetime + " minutos !")
+    await asyncio.sleep(int(mutetime))
+    overwrite.send_messages = False
+    await bot.edit_channel_permissions(ctx.message.channel, member, overwrite)
+
+
+
+
+#RENOMEAR O NICK DO USUARIO
+@bot.command(pass_context=True)
+async def renomear(ctx, membro: discord.Member, *, nick= ""):
+    nickantigo = membro.display_name
+    await bot.change_nickname(membro,nick)
+    embedren = discord.Embed(title=" Alteração de nick!", description=" \n ", color=0x551A8B)
+    embedren.set_thumbnail(url=membro.avatar_url)
+    embedren.add_field(name='Antigo nick',value=nickantigo,inline=True)
+    embedren.add_field(name='Novo nick',value=nick,inline=True)
+    embedren.add_field(name='Alterado por',value=ctx.message.author,inline=True)
+    await bot.say(embed=embedren)
+
 #INFO DO BOT
 @bot.command(pass_context=True)
 async def botinfo():
@@ -131,7 +171,7 @@ async def myinfo(ctx):
     embedusu.add_field(name="Seu Nome", value=user.name)
     embedusu.add_field(name="Seu Id", value=user.id)
     embedusu.add_field(name="Status", value=user.status)
-    embedusu.add_field(name="Entrou no serve em", value=user.joined_at)
+    embedusu.add_field(name="Entrou no serve em", value=user.joined_at("%d %b %Y %H:%M"))
 
     await bot.say(embed=embedusu)
 
@@ -204,6 +244,8 @@ async def help(ctx):
                           color=0x30abc0)
 
     embed.add_field(name='I-MODERAÇÃO', value='----------------------------', inline=False)
+    embed.add_field(name='?multar', value='<marque para mutar>&<insira o tempo em minutos>muta o usuario por um tempo', inline=False)
+    embed.add_field(name='?desmultar', value='<marque para desmultar>desmulta o usuario', inline=False)
     embed.add_field(name='?kick', value='<Marque o membro para kika-lo>tira o membro do servidor', inline=False)
     embed.add_field(name='?ban', value='<Marque o membro para Bani-lo>Bane o membro do servidor', inline=False)
     embed.add_field(name='II-DIVERSÃO', value='----------------------------', inline=False)
@@ -218,6 +260,7 @@ async def help(ctx):
     embed.add_field(name='?github', value='mostra meu repositorio no github', inline=False)
     embed.add_field(name='?botinfo', value='mostra meu status no servidor', inline=False)
     embed.add_field(name='IV-ULTILIDADES', value='----------------------------', inline=False)
+    embed.add_field(name='?renomear', value='<marque quem quer renomear>&<novo nick>Alterar nick ', inline=False)
     embed.add_field(name='?convite', value='envia o convite do server no privado', inline=False)
     embed.add_field(name='?myinfo', value='mostrar suas informações no server', inline=False)
     embed.add_field(name='?serverinfo', value='mostras as informações do servidor', inline=False)
